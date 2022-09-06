@@ -1,16 +1,18 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [package]
 name = "lemuriea"
 version = "0.0.1"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-bevy = "0.8.1"
+bevy = { version = "0.8.0", features = ["dynamic"] }
+#bevy = "0.8.1" #if youre on windows comment the line above and uncomment this line
 
 [workspace]
 resolver = "2" # Important! wgpu/Bevy needs this!  https://bevyengine.org/learn/book/getting-started/setup/
 
-# Enable a small amount of optimization in debug mode
+#       COMMENT THESE 2 PROFILE BELOW FOR FASTER COMPILE
 [profile.dev]
-opt-level = 1
+opt-level = 1 # Enable a small amount of optimization in debug mode
+[profile.dev.package."*"]
+opt-level = 3 # Enable high optimizations for dependencies (incl. Bevy), but not for our code
